@@ -26,6 +26,7 @@
 
 .home-item {
   border: 1px solid whitesmoke;
+  margin: 10px 5px;
 }
 
 .home-type {
@@ -33,7 +34,7 @@
 }
 
 .home-name {
-  font-size: 2rem;
+  font-size: 1.5rem;
   font-weight: bold;
   margin-top: 0;
 }
