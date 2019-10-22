@@ -1,25 +1,21 @@
 import React from 'react';
-import star from './star';
+import Star from './star';
 
-/**
- * 
- * @param {*} homeSpec 
- */
-const HomeItem = (home) => {
-    const { 
-        className, 
-        imgSrc, 
-        homeType, 
-        homeName, 
-        homeSpec, 
-        roomPrice, 
-        roomFullPrice, 
+const Home = (props) => {
+    const {
+        homeId,
+        imgSrc,
+        homeType,
+        homeName,
+        homeSpec,
+        roomPrice,
+        roomFullPrice,
         starringScore,
-        starringReviews
-    } = home;
-    const classNames = `home-item d-flex flex-row ${className}`;
+        starringReviews,
+    } = props.home;
+
     return (
-        <div className={classNames}>
+        <div className="home-item d-flex flex-row" id={homeId}>
             <div className="home-img-box">
                 <img width="300" height="200" src={imgSrc}></img>
             </div>
@@ -32,23 +28,23 @@ const HomeItem = (home) => {
                     </div>
                     <div className="spec-inner-lower-left-box position-absolute d-flex align-items-center">
                         <div className="starring d-flex align-items-center">
-                            {star}
+                            <Star />
                         </div>
-                        <div className="starring-score">
-                            {starringScore}
-                        </div>
+                        <div className="starring-score">{starringScore}</div>
                         <div className="starring-reviews">
                             ({starringReviews})
                         </div>
                     </div>
                     <div className="spec-inner-lower-right-box position-absolute d-flex flex-column">
                         <div className="room-price">₩{roomPrice}/박</div>
-                        <div className="room-full-price">총 요금 : ₩{roomFullPrice}</div>
+                        <div className="room-full-price">
+                            총 요금 : ₩{roomFullPrice}
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
-    )
-}
+    );
+};
 
-export default HomeItem;
+export default Home;
