@@ -9,5 +9,6 @@ RUN npm install --silent
 RUN npm install react-scripts@2.1.3 -g --silent
 
 # 소스를 작업폴더로 복사하고 앱 실행
+# 이 과정 때문에 .env 등도 사용가능할듯
 COPY . /usr/src/app
 CMD ["npm", "start"]
