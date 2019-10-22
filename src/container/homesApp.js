@@ -1,8 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { useState, useEffect } from 'react';
-import styled from 'styled-components';
-import Home from './home';
+import Home from '../component/home';
+import Count from '../component/count';
 
 const dummyToTest = [
     {
@@ -32,10 +31,16 @@ const dummyToTest = [
 ];
 
 const HomesApp = (props) => {
+    const [homeCount, sethomeCount] = useState(12);
+    // fetch here
+    /**
+     *
+     */
     return (
         <>
-            {dummyToTest.map((homeInfos) => (
-                <Home home={homeInfos} />
+            <Count homeCount={homeCount} />
+            {dummyToTest.map((homeInfos, i) => (
+                <Home home={homeInfos} key={i} />
             ))}
         </>
     );
