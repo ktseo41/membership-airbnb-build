@@ -1,34 +1,23 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import { useState, useEffect } from 'react';
-import styled from 'styled-components';
-
-const TopButton = styled.button`
-    border: 1px solid black;
-    margin: 5px;
-    border-radius: 5px;
-    outline: none;
-    font-size: 1.2em;
-
-    :hover {
-        background-color: #bfbfbf;
-    }
-
-    :focus {
-        background-color: #1b9498;
-        color: white;
-        outline: none;
-    }
-`;
+import TopButton from './topButton';
+import Calendar from './calendar';
 
 const ButtonsApp = (props) => {
+    const { toggleModalFromElsewhere } = props;
     return (
         <>
-            <TopButton>날짜</TopButton>
-            <TopButton>인원</TopButton>
-            <TopButton>숙소 인원</TopButton>
-            <TopButton>가격</TopButton>
-            <TopButton>필터 추가하기</TopButton>
+            <TopButton
+                name="날짜"
+                clickFunc={toggleModalFromElsewhere}
+            ></TopButton>
+            <TopButton name="인원" clickFunc={toggleModalFromElsewhere} />
+            <TopButton name="숙소 유형" clickFunc={toggleModalFromElsewhere} />
+            <TopButton name="가격" clickFunc={toggleModalFromElsewhere} />
+            <TopButton
+                name="필터 추가하기"
+                clickFunc={toggleModalFromElsewhere}
+            />
         </>
     );
 };
