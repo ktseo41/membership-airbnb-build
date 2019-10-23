@@ -16,7 +16,6 @@ const HomesApp = (props) => {
         return <div>Error Occured!</div>;
     }
     const { getAllHome } = data;
-    // sethomeCount(getAllHome.length);
     return (
         <>
             <Count homeCount={getAllHome.length} />

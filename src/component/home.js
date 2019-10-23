@@ -1,7 +1,7 @@
 import React from 'react';
 import Star from './star';
 
-const Home = (props) => {
+const Home = ({ home }) => {
     const {
         home_id,
         thumbnail,
@@ -10,7 +10,7 @@ const Home = (props) => {
         price,
         review_rating,
         review_number,
-    } = props.home;
+    } = home;
 
     return (
         <div className="home-item d-flex flex-row" id={home_id}>
