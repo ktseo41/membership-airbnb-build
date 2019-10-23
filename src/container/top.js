@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ButtonsApp from '../component/buttonsApp';
 import Logo from '../component/logo';
+import Modal from '../component/modal';
 
 const TopDiv = styled.div`
     color: white;
@@ -13,11 +14,25 @@ const TopDiv = styled.div`
 `;
 
 const Top = (props) => {
+    const observers = {
+        List: [],
+    };
+    const modalState = { isOpen: false };
+    const toggleModalFromElsewhere = (e) => {
+        // console.log(e.target);
+        // console.log(e.target.offsetLeft);
+        let { isOpen } = modalState;
+        isOpen = !isOpen;
+        observers.List.forEach((observer) => observer());
+    };
     return (
         <section className="top">
             <TopDiv className="d-flex align-items-center">
                 <Logo />
-                <ButtonsApp />
+                <ButtonsApp
+                    toggleModalFromElsewhere={toggleModalFromElsewhere}
+                />
+                <Modal observers={observers} />
             </TopDiv>
         </section>
     );
