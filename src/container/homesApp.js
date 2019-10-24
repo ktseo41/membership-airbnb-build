@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import queries from '../query';
 import Home from '../component/home';
-import Count from '../component/count';
+import Count from '../component/homecount';
 
 const HomesApp = (props) => {
     const { GET_ALL_HOME } = queries;
