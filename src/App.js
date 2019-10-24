@@ -7,6 +7,12 @@ import { Top } from './container/top';
 import HomesApp from './container/homesApp';
 import env from './env';
 
+export const GlobalContext = React.createContext({
+    content: null,
+    toggleModal: null,
+    buttonsState: null,
+});
+
 const { host, port, endpoint } = env;
 const client = new ApolloClient({
     uri: `http://${host}:${port}/${endpoint}`,
@@ -19,11 +25,15 @@ const client = new ApolloClient({
 function App() {
     const name = 'membership-airbnb-build from ss38';
     return (
-        <ApolloProvider client={client}>
-            <Top />
-            <HomesApp />
-        </ApolloProvider>
+        <GlobalContext.Provider
+            value={{ content: null, toggleModal: null, buttonsState: null }}
+        >
+            <ApolloProvider client={client}>
+                <Top />
+                <HomesApp />
+            </ApolloProvider>
+        </GlobalContext.Provider>
     );
 }
 
-export default App;
+export { App };

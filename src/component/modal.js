@@ -1,12 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import ReactModal from 'react-modal';
 import { ModalConsumer } from '../container/top';
+import { GlobalContext } from '../App';
 ReactModal.setAppElement('body');
 
+const CloseButtonDiv = styled.div`
+    font-weight: bold;
+    text-align: right;
+`;
+
 const modalStyle = {
+    overlay: { position: 'absolute', top: '77px' },
     content: {
         top: '50%',
         left: '50%',
@@ -28,25 +35,18 @@ const Modal = (props) => {
         setisOpen(false);
     };
 
+    const globalContext = useContext(GlobalContext);
+    globalContext.toggleModal = toggleModal;
     return (
         <>
-            <ModalConsumer>
-                {(contextProps) => {
-                    contextProps.toggleModal = toggleModal;
-                    return (
-                        <>
-                            <ReactModal
-                                isOpen={isOpen}
-                                style={modalStyle}
-                                onRequestClose={closeModal}
-                            >
-                                <button onClick={closeModal}>x</button>
-                                {contextProps.content}
-                            </ReactModal>
-                        </>
-                    );
-                }}
-            </ModalConsumer>
+            <ReactModal
+                isOpen={isOpen}
+                style={modalStyle}
+                onRequestClose={closeModal}
+            >
+                <CloseButtonDiv onClick={closeModal}>x</CloseButtonDiv>
+                {globalContext.content}
+            </ReactModal>
         </>
     );
 };

@@ -1,7 +1,8 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import styled from 'styled-components';
 import { ModalConsumer } from '../container/top';
+import { GlobalContext } from '../App';
 
 const CustomTopButton = styled.button`
     border: 1px solid black;
@@ -9,15 +10,19 @@ const CustomTopButton = styled.button`
     border-radius: 5px;
     outline: none;
     font-size: 1.2em;
+    background-color: ${({ selected }) => {
+        switch (selected) {
+            case 'notSelected':
+                return '';
+            case 'selected':
+                return '#1b9498';
+            case 'hover':
+                break;
+        }
+    }};
 
     :hover {
         background-color: #bfbfbf;
-    }
-
-    :focus {
-        background-color: #1b9498;
-        color: white;
-        outline: none;
     }
 `;
 
@@ -27,23 +32,32 @@ const CustomTopButton = styled.button`
  * @param {ReactComponent} props.modalContent
  */
 const TopButton = (props) => {
-    const [selected, setSelected] = useState(false);
-    const { name, modalContent } = props;
+    const { index, name, buttonsState, modalContent } = props;
+    const {
+        buttonsSelected,
+        setButtonsSelected,
+        buttonsName,
+        setButtonsName,
+    } = buttonsState;
+    const globalContext = useContext(GlobalContext);
     return (
-        <ModalConsumer>
-            {(contextProps) => {
-                return (
-                    <CustomTopButton
-                        onClick={() => {
-                            contextProps.content = modalContent;
-                            contextProps.toggleModal();
-                        }}
-                    >
-                        {name}
-                    </CustomTopButton>
+        <CustomTopButton
+            onClick={() => {
+                setButtonsSelected(
+                    buttonsSelected.map((val, i) => {
+                        if (i === index) {
+                            return 'selected';
+                        }
+                        return val;
+                    })
                 );
+                globalContext.content = modalContent;
+                globalContext.toggleModal();
             }}
-        </ModalConsumer>
+            selected={buttonsSelected[index]}
+        >
+            {name}
+        </CustomTopButton>
     );
 };
 

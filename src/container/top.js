@@ -23,13 +23,11 @@ const TopDiv = styled.div`
 export const Top = (props) => {
     return (
         <section className="top">
-            <ModalContext.Provider value={{ content: null, toggleModal: null }}>
-                <TopDiv className="d-flex align-items-center">
-                    <Logo />
-                    <ButtonsApp />
-                    <Modal />
-                </TopDiv>
-            </ModalContext.Provider>
+            <TopDiv className="d-flex align-items-center">
+                <Logo />
+                <ButtonsApp />
+                <Modal />
+            </TopDiv>
         </section>
     );
 };
