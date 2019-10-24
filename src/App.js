@@ -3,7 +3,7 @@ import './App.css';
 import { ApolloProvider } from '@apollo/react-hooks';
 import ApolloClient from 'apollo-boost';
 import { InMemoryCache } from 'apollo-cache-inmemory';
-import Top from './container/top';
+import { Top } from './container/top';
 import HomesApp from './container/homesApp';
 import env from './env';
 

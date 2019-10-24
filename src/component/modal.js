@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import ReactModal from 'react-modal';
-import CalendarWrapper from './calendar';
+import { ModalConsumer } from '../container/top';
 ReactModal.setAppElement('body');
 
 const modalStyle = {
@@ -18,23 +18,35 @@ const modalStyle = {
 };
 
 const Modal = (props) => {
-    const { observers } = props;
+    const { content } = props;
     const [isOpen, setisOpen] = useState(false);
     const toggleModal = () => {
         setisOpen(!isOpen);
     };
 
-    observers.List = [toggleModal];
-
-    // console.log(observers.List);
+    const closeModal = () => {
+        setisOpen(false);
+    };
 
     return (
         <>
-            <ReactModal isOpen={isOpen} style={modalStyle}>
-                <button onClick={toggleModal}>x</button>
-                <CalendarWrapper />
-                <div>testtest</div>
-            </ReactModal>
+            <ModalConsumer>
+                {(contextProps) => {
+                    contextProps.toggleModal = toggleModal;
+                    return (
+                        <>
+                            <ReactModal
+                                isOpen={isOpen}
+                                style={modalStyle}
+                                onRequestClose={closeModal}
+                            >
+                                <button onClick={closeModal}>x</button>
+                                {contextProps.content}
+                            </ReactModal>
+                        </>
+                    );
+                }}
+            </ModalConsumer>
         </>
     );
 };

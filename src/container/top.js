@@ -6,6 +6,13 @@ import ButtonsApp from '../component/buttonsApp';
 import Logo from '../component/logo';
 import Modal from '../component/modal';
 
+export const ModalContext = React.createContext({
+    content: null,
+    toggleModal: null,
+});
+
+export const ModalConsumer = ModalContext.Consumer;
+
 const TopDiv = styled.div`
     color: white;
     margin: 1rem 0rem;
@@ -13,29 +20,16 @@ const TopDiv = styled.div`
     border-bottom: 1px solid #282c34;
 `;
 
-const Top = (props) => {
-    const observers = {
-        List: [],
-    };
-    const modalState = { isOpen: false };
-    const toggleModalFromElsewhere = (e) => {
-        // console.log(e.target);
-        // console.log(e.target.offsetLeft);
-        let { isOpen } = modalState;
-        isOpen = !isOpen;
-        observers.List.forEach((observer) => observer());
-    };
+export const Top = (props) => {
     return (
         <section className="top">
-            <TopDiv className="d-flex align-items-center">
-                <Logo />
-                <ButtonsApp
-                    toggleModalFromElsewhere={toggleModalFromElsewhere}
-                />
-                <Modal observers={observers} />
-            </TopDiv>
+            <ModalContext.Provider value={{ content: null, toggleModal: null }}>
+                <TopDiv className="d-flex align-items-center">
+                    <Logo />
+                    <ButtonsApp />
+                    <Modal />
+                </TopDiv>
+            </ModalContext.Provider>
         </section>
     );
 };
-
-export default Top;

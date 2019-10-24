@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { ModalConsumer } from '../container/top';
 
 const CustomTopButton = styled.button`
     border: 1px solid black;
@@ -20,13 +21,29 @@ const CustomTopButton = styled.button`
     }
 `;
 
+/**
+ *
+ * @param {} props
+ * @param {ReactComponent} props.modalContent
+ */
 const TopButton = (props) => {
     const [selected, setSelected] = useState(false);
-    const { name, clickFunc } = props;
+    const { name, modalContent } = props;
     return (
-        <div>
-            <CustomTopButton onClick={clickFunc}>{name}</CustomTopButton>
-        </div>
+        <ModalConsumer>
+            {(contextProps) => {
+                return (
+                    <CustomTopButton
+                        onClick={() => {
+                            contextProps.content = modalContent;
+                            contextProps.toggleModal();
+                        }}
+                    >
+                        {name}
+                    </CustomTopButton>
+                );
+            }}
+        </ModalConsumer>
     );
 };
 
