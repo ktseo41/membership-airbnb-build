@@ -33,30 +33,20 @@ const CustomTopButton = styled.button`
  */
 const TopButton = (props) => {
     const { index, name, buttonsState, modalContent } = props;
-    const {
-        buttonsSelected,
-        setButtonsSelected,
-        buttonsName,
-        setButtonsName,
-    } = buttonsState;
+    const [buttonName, setButtonName] = useState(name);
+    const [selected, setSelected] = useState('notSelected');
     const globalContext = useContext(GlobalContext);
     return (
         <CustomTopButton
             onClick={() => {
-                setButtonsSelected(
-                    buttonsSelected.map((val, i) => {
-                        if (i === index) {
-                            return 'selected';
-                        }
-                        return val;
-                    })
-                );
+                setSelected('selected');
+                globalContext.currentButton = { index, setButtonName };
                 globalContext.content = modalContent;
                 globalContext.toggleModal();
             }}
-            selected={buttonsSelected[index]}
+            selected={selected}
         >
-            {name}
+            {buttonName}
         </CustomTopButton>
     );
 };
