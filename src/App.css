@@ -37,3 +37,12 @@
     bottom: 0px;
     right: 5px;
 }
+
+.ReactModal__Content {
+    display: flex;
+    flex-direction: column;
+}
+
+.DayPicker__withBorder {
+    box-shadow: none !important;
+}

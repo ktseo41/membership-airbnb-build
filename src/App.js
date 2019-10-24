@@ -22,7 +22,7 @@ const client = new ApolloClient({
     }),
 });
 
-function App() {
+export function App() {
     const name = 'membership-airbnb-build from ss38';
     return (
         <GlobalContext.Provider
@@ -35,5 +35,3 @@ function App() {
         </GlobalContext.Provider>
     );
 }
-
-export { App };
